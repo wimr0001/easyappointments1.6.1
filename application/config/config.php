@@ -155,9 +155,10 @@ if ($requested_language !== null && !in_array($requested_language, $languages, t
     $requested_language = null; // Invalid language, ignore it
 }
 
-$config['language'] = $requested_language ?? ($detected_language ?? Config::LANGUAGE);
+//$config['language'] = $requested_language ?? ($detected_language ?? Config::LANGUAGE);
+$config['language'] = Config::LANGUAGE;
 
-$config['language_code'] = array_search($config['language'], $languages) ?: 'en';
+$config['language_code'] = array_search($config['language'], $languages) ?: 'nl';
 
 /*
 |--------------------------------------------------------------------------

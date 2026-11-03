@@ -591,4 +591,6 @@ $lang['caldav_sync_failed_credentials'] = 'The CalDAV server rejected the user n
 $lang['caldav_sync_failed_unreachable'] = 'The CalDAV server could not be reached. Make sure that it is running and that the connection URL is correct.';
 $lang['caldav_private_host_warning'] = 'This server is on a private network. Connecting will add its host to the allowed connection URLs.';
 $lang['caldav_allow_host_and_connect'] = 'Allow and connect';
+$lang['hide_customer_timezone'] = 'Hide Customer Timezone';
+$lang['hide_customer_timezone_hint'] = 'Hide the timezone selection from the customers. Instead, use the Default Timezone (defined under General Settings) for all new bookings.';
 // End

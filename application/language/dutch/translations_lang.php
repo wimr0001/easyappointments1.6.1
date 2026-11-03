@@ -52,7 +52,7 @@ $lang['appointment_link_title'] = 'Afspraak link';
 $lang['success'] = 'Succes.';
 $lang['appointment_added_to_your_plan'] = 'Een nieuwe afspraak is toegevoegd aan uw agenda.';
 $lang['appointment_link_description'] = 'U kunt wijzigingen aanbrengen door te klikken op onderstaande link van de afspraak.';
-$lang['appointment_locked'] = 'Modification impossible.';
+$lang['appointment_locked'] = 'Wijziging of annulering niet toegestaan';
 $lang['appointment_locked_message'] = 'De afspraak kan niet minder dan {$limit} uur van tevoren worden gewijzigd.';
 $lang['appointment_not_found'] = 'Afspraak niet gevonden.';
 $lang['appointment_does_not_exist_in_db'] = 'De door u opgevraagde afspraak bestaat niet meer in de database van het systeem.';
@@ -591,4 +591,6 @@ $lang['caldav_sync_failed_credentials'] = 'De CalDAV-server heeft de gebruikersn
 $lang['caldav_sync_failed_unreachable'] = 'De CalDAV-server kon niet worden bereikt. Controleer of de server draait en of de verbindings-URL juist is.';
 $lang['caldav_private_host_warning'] = 'Deze server staat in een privénetwerk. Bij het verbinden wordt de host toegevoegd aan de toegestane verbindings-URL\'s.';
 $lang['caldav_allow_host_and_connect'] = 'Toestaan en verbinden';
+$lang['hide_customer_timezone'] = 'Verberg tijdzone voor klant';
+$lang['hide_customer_timezone_hint'] = 'Verberg de tijdzoneselectie voor klanten. Gebruik in plaats daarvan de standaardtijdzone (gedefinieerd onder algemene instellingen) voor alle nieuwe boekingen.';
 // End

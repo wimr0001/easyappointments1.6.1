@@ -17,6 +17,8 @@ $customer_full_name = trim($customer_first_name . ' ' . $customer_last_name);
 $customer_email = trim((string) ($customer['email'] ?? ''));
 $customer_phone_number = trim((string) ($customer['phone_number'] ?? ''));
 $customer_address = trim((string) ($customer['address'] ?? ''));
+//wro: Hide Timezone from Customers (LNU README.md #6).
+$hide_customer_timezone = boolval(setting('hide_customer_timezone', 0));
 ?>
 
 <!doctype html>
@@ -452,6 +454,7 @@ $customer_address = trim((string) ($customer['address'] ?? ''));
 
                                                 </td>
                                             </tr>
+                                            <?php if (!$hide_customer_timezone): ?>
                                             <tr>
                                                 <td class="label" style="padding: 3px;font-weight: bold;">
                                                     <?= lang('timezone') ?>
@@ -460,7 +463,7 @@ $customer_address = trim((string) ($customer['address'] ?? ''));
                                                     <?= format_timezone($timezone) ?>
                                                 </td>
                                             </tr>
-
+                                            <?php endif; ?>
                                             <?php if (!empty($appointment['status'])): ?>
                                                 <tr>
                                                     <td class="label" style="padding: 3px;font-weight: bold;">

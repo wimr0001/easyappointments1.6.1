@@ -1,5 +1,6 @@
 insert into ea_settings (name, value) values("hide_customer_timezone", 1);
 insert into ea_settings (name, value) values("services_for_new_customers", "[15,18,32]");
+insert into ea_settings (name, value) values("blocked_months", 2);
 
 ALTER TABLE `ea_appointments` ADD `reminder_datetime` DATETIME NULL DEFAULT NULL AFTER `id_caldav_calendar`;
 ALTER TABLE `ea_appointments` ADD `reminder_statustext` text NULL DEFAULT NULL AFTER `reminder_datetime`;

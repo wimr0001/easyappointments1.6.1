@@ -19,6 +19,10 @@ $customer_full_name = trim($customer_first_name . ' ' . $customer_last_name);
 $customer_email = trim((string) ($customer['email'] ?? ''));
 $customer_phone_number = trim((string) ($customer['phone_number'] ?? ''));
 $customer_address = trim((string) ($customer['address'] ?? ''));
+//wro: Hide Timezone from Customers (LNU README.md #6).
+$hide_customer_timezone = boolval($settings['hide_customer_timezone'] ?? 1);
+//$hide_customer_timezone = 1;
+$company_link = trim((string)$settings['company_link']);
 ?>
 
 <!doctype html>
@@ -394,7 +398,6 @@ $customer_address = trim((string) ($customer['address'] ?? ''));
         <td>&nbsp;</td>
         <td class="container">
             <div class="content">
-
                 <!-- START CENTERED WHITE CONTAINER -->
                 <table role="presentation" class="main">
 
@@ -454,6 +457,7 @@ $customer_address = trim((string) ($customer['address'] ?? ''));
 
                                                 </td>
                                             </tr>
+                                            <?php if (!$hide_customer_timezone): ?>
                                             <tr>
                                                 <td class="label" style="padding: 3px;font-weight: bold;">
                                                     <?= lang('timezone') ?>
@@ -462,7 +466,7 @@ $customer_address = trim((string) ($customer['address'] ?? ''));
                                                     <?= format_timezone($timezone) ?>
                                                 </td>
                                             </tr>
-
+                                            <?php endif; ?>
                                             <?php if (!empty($appointment['status'])): ?>
                                                 <tr>
                                                     <td class="label" style="padding: 3px;font-weight: bold;">
@@ -610,32 +614,32 @@ $customer_address = trim((string) ($customer['address'] ?? ''));
 // customer reschedule/cancel link would error. Suppress it for them; the
 // backend (calendar) link used by staff still works.
 ?>
-                                        <?php if (
-                                            empty($service['is_private']) ||
-                                            !str_contains($appointment_link, '/booking/')
-                                        ): ?>
-                                        <table class="btn btn-primary" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                            <tbody>
-                                                <tr>
-                                                    <td align="center">
-                                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <a href="<?= e(
-                                                                            $appointment_link,
-                                                                        ) ?>" target="_blank"><?= lang(
-    'reschedule_or_cancel_appointment',
-) ?></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <?php endif; ?>
+                                                <?php if (!$service['is_private'] ): ?>
+                                                    <table class="btn btn-primary" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <a href="<?= $company_link ?>/fastUpdate.php?hash=<?= e($appointment['hash']) ?>" target="_blank">Wijzig / Annuleer afspraak</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                <?php else: ?>
+                                                <h2>Wijzigen of annuleren van de afspraak</h2>
+                                                    <p>Als u deze afspraak wilt annuleren of wilt wijzigen, dan gelieve u contact op te nemen met de pedicures.
+                                                        Dit kan telefonisch maar bij voorkeur via ons 
+                                                        <a href="<?php $company_link ?>/formulieren/wijzigen-of-annuleren-afspraak">wijzigingsformulier</a>.
+                                                        Wijzigen of annuleren van de afspraak kan tot 24 uur voor de afspraak, daarna zijn wij genoodzaakt u de kosten van de behandeling in rekening te brengen.
+                                                    </p>
+                                                <?php endif; ?>   
                                         
                                         
                                     </td>

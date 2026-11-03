@@ -420,7 +420,25 @@
                                 </div>
                             </div>
                         </div>
+                             <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="hide-customer-timezone"
+                                                   data-field="hide_customer_timezone">
+                                            <label class="form-check-label" for="hide-customer-timezone">
+                                                <?= lang('hide_customer_timezone') ?>
+                                            </label>
+                                        </div>
 
+                                        <div class="form-text text-muted">
+                                            <small>
+                                                <?= lang('hide_customer_timezone_hint') ?>
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </fieldset>
                 </form>
             </div>

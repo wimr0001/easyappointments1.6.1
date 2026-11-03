@@ -254,7 +254,7 @@ App.Http.Booking = (function () {
 
                     return false;
                 }
-
+                localStorage.removeItem("pedicureinkampen.appointment");
                 window.location.href = App.Utils.Url.siteUrl('booking_confirmation/of/' + response.appointment_hash);
             })
             .fail(() => {
@@ -289,6 +289,44 @@ App.Http.Booking = (function () {
         const appointmentId = App.Pages.Booking.manageMode ? vars('appointment_data').id : null;
 
         const url = App.Utils.Url.siteUrl('booking/get_unavailable_dates');
+
+        //wro begin
+        if (appointmentId == null) {
+            const nowMoment = moment()
+            const now = nowMoment.valueOf();
+            let selectedDateMoment = moment(selectedDateString);
+            const selected = selectedDateMoment.valueOf();
+            if (selected < now) {
+                selectedDateMoment = nowMoment;
+            }
+            const diff = selectedDateMoment.diff(nowMoment, 'days');
+            if (diff < 60) {
+               const blocked = vars('blocked_months');
+               selectedDateMoment = nowMoment;
+               selectedDateMoment.add(blocked, 'month');
+            }
+            selectedDateString = selectedDateMoment.format('YYYY-MM-DD');
+        // } else {
+        //     if (window.startMomentAppointment) {
+        //         console.log("selectedDateString", selectedDateString)
+        //         console.log("startMoment", window.startMomentAppointment)
+        //         let selectedDateMoment = moment(selectedDateString);
+        //         let startMoment = window.startMomentAppointment;
+        //         const selected = selectedDateMoment.valueOf();
+        //         const start = startMoment.valueOf();
+        //         if (selected < start) {
+        //            const diff = startMoment.diff(selectedDateMoment, 'days');
+        //            console.log("diff", diff);
+        //            if (diff > 30) {
+        //               selectedDateMoment.add(diff / 30, 'month');
+        //               console.log("new selectedDateMoment", selectedDateMoment)
+        //           }
+        //         }
+        //         selectedDateString = selectedDateMoment.format('YYYY-MM-DD');
+        //         console.log("updated selectedDateString", selectedDateString)
+        //     }
+        }
+        //wro end        
 
         const data = {
             provider_id: providerId,

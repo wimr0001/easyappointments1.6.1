@@ -63,11 +63,37 @@ App.Pages.Booking = (function () {
     function detectDatepickerMonthChangeStep(previousDateTimeMoment, nextDateTimeMoment) {
         return previousDateTimeMoment.isAfter(nextDateTimeMoment) ? -1 : 1;
     }
-
+    //wro begin
+    function wroInit() {
+        const myls = localStorage.getItem("pedicureinkampen.appointment");
+        if (myls === null) {
+            window.location.href = location.origin;
+            return;
+        }
+        const myarr = JSON.parse(myls);
+        if (myarr['isClient'] === 1) {
+            return;
+        }        
+        if (myarr['newClientsAllowed'] === 1) {
+            return;
+        }
+        shrinkOptions();
+    }
+    function shrinkOptions() {
+        const avail = vars('services_for_new_customers');
+        $.each($selectService.find('option'), function () {
+            const v = $(this).val();
+            if (!avail.includes(Number(v)) && v > 0) {
+                $selectService.find('option[value=' + v + ']').remove();
+            }
+        });
+    }
+//wro end
     /**
      * Initialize the module.
      */
     function initialize() {
+        // wroInit();
         if (Boolean(Number(vars('display_cookie_notice'))) && window?.cookieconsent) {
             cookieconsent.initialise({
                 palette: {
@@ -168,9 +194,20 @@ App.Pages.Booking = (function () {
 
         App.Utils.UI.setDateTimePickerValue($selectDate, new Date());
 
-        const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const isTimezoneSupported = $selectTimezone.find(`option[value="${browserTimezone}"]`).length > 0;
-        $selectTimezone.val(isTimezoneSupported ? browserTimezone : 'UTC');
+        // const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        // const isTimezoneSupported = $selectTimezone.find(`option[value="${browserTimezone}"]`).length > 0;
+        // $selectTimezone.val(isTimezoneSupported ? browserTimezone : 'UTC');
+
+        //wro: Hide Timezone from Customers (README.md #6).
+        if (Boolean(Number(vars('hide_customer_timezone')))) {
+            const defaultTimezone = vars('default_timezone');
+            const isDefaultTimezoneSupported = $selectTimezone.find(`option[value="${defaultTimezone}"]`).length > 0;
+            $selectTimezone.val(isDefaultTimezoneSupported ? defaultTimezone : 'UTC');
+        } else {
+            const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const isTimezoneSupported = $selectTimezone.find(`option[value="${browserTimezone}"]`).length > 0;
+            $selectTimezone.val(isTimezoneSupported ? browserTimezone : 'UTC');
+        }
 
         // Bind the event handlers (might not be necessary every time we use this class).
         addEventListeners();
@@ -785,7 +822,7 @@ App.Pages.Booking = (function () {
                     <i class="fas fa-clock me-2"></i>
                     ${service.duration} ${lang('minutes')}
                 </div>
-                <div class="mb-2">
+                <div class="mb-2" ${Boolean(Number(vars('hide_customer_timezone'))) ? 'hidden' : ''}>
                     <i class="fas fa-globe me-2"></i>
                     ${App.Utils.String.escapeHtml(timezoneOptionText)}
                 </div> 
@@ -931,6 +968,18 @@ App.Pages.Booking = (function () {
         try {
             // Select Service & Provider
             $selectService.val(appointment.id_services).trigger('change');
+
+            //wro begin
+            // remove the other services, once a service choosen, you cannot choose another service
+//            const avail = [appointment.id_services];
+//            $.each($selectService.find('option'), function () {
+//                const v = $(this).val();
+//                if (!avail.includes(Number(v)) && v > 0) {
+//                    $selectService.find('option[value=' + v + ']').remove();
+//                }
+//            });
+            //wro end  
+            
             $selectProvider.val(appointment.id_users_provider);
 
             // Set Appointment Date

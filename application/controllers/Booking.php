@@ -290,6 +290,9 @@ class Booking extends EA_Controller
             'display_cookie_notice' => $display_cookie_notice,
             'display_any_provider' => setting('display_any_provider'),
             'future_booking_limit' => setting('future_booking_limit'),
+            'hide_customer_timezone' => setting('hide_customer_timezone', 0),
+            'services_for_new_customers' => setting('services_for_new_customers'),
+            'blocked_months' => setting("blocked_months"),
             'appointment_data' => $appointment,
             'provider_data' => $provider ? filter_sensitive_user_data($provider) : null,
             'customer_data' => $customer,
@@ -573,6 +576,7 @@ class Booking extends EA_Controller
                 'company_name' => setting('company_name'),
                 'company_link' => setting('company_link'),
                 'company_email' => setting('company_email'),
+                'hide_customer_timezone' => setting('hide_customer_timezone'),
                 'company_color' =>
                     !empty($company_color) && $company_color != DEFAULT_COMPANY_COLOR ? $company_color : null,
                 'date_format' => setting('date_format'),
