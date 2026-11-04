@@ -13,11 +13,11 @@
         <h2 class="frame-title fw-light text-center mb-4 text-muted"><?= lang('appointment_confirmation') ?></h2>
 
         <div class="row frame-content m-auto pt-md-4 mb-4" style="max-width: 630px;">
-            <div id="appointment-details" class="col-12 col-lg-6 text-center text-md-start mb-2 mb-md-0 fs-5" style="line-height: 28px;">
+            <div id="appointment-details" class="col-12 col-md-6 text-center text-md-start mb-2 mb-md-0 fs-5" style="line-height: 28px;">
                 <!-- JS -->
             </div>
 
-            <div id="customer-details" class="col-12 col-lg-6 text-center text-md-end fs-5" style="line-height: 28px;">
+            <div id="customer-details" class="col-12 col-md-6 text-center text-md-end fs-5" style="line-height: 28px;">
                 <!-- JS -->
             </div>
 

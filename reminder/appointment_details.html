@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <title>Afspraken www.pedicureinkampen.nl</title>
+    </head>
+    <body>
+        <div>
+            <div id="header" style="background-color: #008EAA; height: 45px; padding: 10px 15px;">
+                <strong id="logo" style="color: white; font-size: 20px; margin-top: 10px; display: inline-block">
+                    <?= $company_name ?>
+                </strong>
+            </div>
+
+            <div>
+                <h2><?= $email_title ?></h2>
+                <p><?= $email_message ?></p>
+
+                <h2>Uw afspraak</h2>
+                <table id="appointment-details">
+                    <tr>
+                        <td><strong>Dienst</strong></td>
+                        <td><?= $appointment_service ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Medewerker</strong></td>
+                        <td><?= $appointment_provider ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Begin</strong></td>
+                        <td><?= $appointment_start_date ?></td>
+                    </tr>
+                    <tr>
+                        <td valign="top"><strong>Locatie</strong></td>
+                        <td>
+                            Lovinkstraat 39 in Kampen
+                            <br/>
+                            Zie voor de route <a href="https://www.google.nl/maps/place/Lovinkstraat+39,+8265+BS+Kampen/@52.5483584,5.9074574,17z/data=!3m1!4b1!4m6!3m5!1s0x47c7d6259679bafd:0x2e6488d187fd1ec2!8m2!3d52.5483584!4d5.9100323!16s%2Fg%2F11b8y_sm7m?entry=ttu">Google maps</a>.
+                            <br/>
+                            <!-- Zie ook <a href="https://www.google.nl/maps/place/Lovinkstraat+39,+8265+BS+Kampen/@52.5483584,5.9074574,17z/data=!3m1!4b1!4m6!3m5!1s0x47c7d6259679bafd:0x2e6488d187fd1ec2!8m2!3d52.5483584!4d5.9100323!16s%2Fg%2F11b8y_sm7m?entry=ttu">Street view</a>. -->
+                        </td>
+                    </tr>
+                </table>
+
+                <h2>Uw gegevens</h2>
+                <table id="customer-details">
+                    <tr>
+                        <td><strong>Naam</strong></td>
+                        <td><?= $customer_name ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>E-mail</strong></td>
+                        <td><?= $customer_email ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Telefoonnummer</strong></td>
+                        <td><?= $customer_phone ?></td>
+                    </tr>
+                </table>
+            </div>
+            <h2>Wijzigen of annuleren afspraak</h2>
+            <?php if ($service_private == 0) : ?>
+            <p>Met onderstaande link kunt u de afspraak wijzigen of annuleren.<p>
+            <p><a href="https://www.pedicureinkampen.nl/fastUpdate.php?hash=<?= $appointment_hash ?>">Wijzigen / annuleren afspraak</a></p>
+            <p><strong>N.B.</strong> De afspraak kan niet worden gewijzigd of geannuleerd binnen 24 uur voor de afspraak. 
+                Komt u niet op de afgesproken datum/tijd dan zijn wij genoodzaakt de kosten van de behandeling in rekening te brengen.</p>
+            <span>In geval van bijzondere omstandigheden kunt u altijd telefonisch contact met ons opnemen.</span>
+            <p>Lukt het niet binnen de door u gewenste tijd een nieuwe afspraak te plannen, laat dan de bestaande afspraak vervallen en
+                vul ons afspraakformulier in met daarin voor u geschikte data en tijdslots.
+                Als er een plek vrij komt zullen wij telefonisch of via e-mail contact met u opnemen.</p>
+            <span><a href="https://www.pedicureinkampen.nl/formulieren/afspraakformulier">Afspraakformulier</a></span>
+            <?php else : ?>
+            <p>Als u deze afspraak wilt annuleren of wijzigen, neem dan contact op met de pedicure.
+                Dit kan telefonisch maar bij voorkeur via ons 
+                <a href="https://www.pedicureinkampen.nl/formulieren/wijzigen-of-annuleren-afspraak">wijzigingsformulier</a>.
+                Wijzigen of annuleren van de afspraak kan tot 24 uur voor de afspraak, daarna zijn wij genoodzaakt u de kosten
+                van de behandeling in rekening te brengen.
+            </p> 
+            <?php endif; ?>            
+            <div id="footer" style="padding: 10px; text-align: center; margin-top: 10px;
+                 border-top: 1px solid #EEE; background: #FAFAFA;">
+                Powered by
+                <a href="https://easyappointments.org">Easy!Appointments</a>
+                |
+                <a href="<?= $company_link ?>">www.pedicureinkampen.nl</a>
+            </div>
+        </div>
+    </body>
+</html>
