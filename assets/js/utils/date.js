@@ -36,7 +36,7 @@ window.App.Utils.Date = (function () {
 
         switch (dateFormatType) {
             case 'DMY':
-                dateFormat = 'DD/MM/YYYY';
+                dateFormat = 'DD-MM-YYYY';
                 break;
 
             case 'MDY':

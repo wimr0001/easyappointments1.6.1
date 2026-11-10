@@ -9,7 +9,7 @@
  * @since       v1.5.0
  * ---------------------------------------------------------------------------- */
 
-/**
+/** 
  * Booking page.
  *
  * This module implements the functionality of the booking page
@@ -93,7 +93,7 @@ App.Pages.Booking = (function () {
      * Initialize the module.
      */
     function initialize() {
-        // wroInit();
+        wroInit();
         if (Boolean(Number(vars('display_cookie_notice'))) && window?.cookieconsent) {
             cookieconsent.initialise({
                 palette: {
@@ -497,6 +497,7 @@ App.Pages.Booking = (function () {
                 const appointmentDate = manageMode ? App.Utils.UI.getDateTimePickerValue($selectDate) : null;
 
                 const selectedMoment = appointmentDate ? moment(appointmentDate) : moment();
+                //window.startMomentAppointment = selectedMoment;
 
                 App.Utils.UI.setDateTimePickerValue($selectDate, selectedMoment.toDate());
 
